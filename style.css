@@ -10,6 +10,22 @@ body {
   color: #222;
   line-height: 1.6;
 }
+header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #faf8f8; /* puedes cambiar el color */
+}
+
+.logo {
+  
+  height: 200px; width: 200px; 
+  border-radius: 150px;
+  mix-blend-mode: multiply;
+  margin-right: 10px;
+  /* ajusta el tamaño */
+  
+}
 
 /* Fondo del encabezado */
 header {
