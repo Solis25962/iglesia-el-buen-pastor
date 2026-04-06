@@ -1,10 +1,30 @@
 // ===== FORMULARIO DE CONTACTO =====
-document.getElementById("contactForm").addEventListener("submit", function(e) {
+document.getElementById("contactForm").addEventListener("submit", async function(e) {
   e.preventDefault();
   const nombre = document.getElementById("nombre").value;
   const confirmacion = document.getElementById("confirmacion");
-  confirmacion.textContent = `¡Gracias, ${nombre}! Hemos recibido tu mensaje. ¡Dios te bendiga!`;
-  this.reset();
+  const btn = this.querySelector("button[type=submit]");
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
+  const response = await fetch(this.action, {
+    method: "POST",
+    body: new FormData(this),
+    headers: { Accept: "application/json" }
+  });
+
+  if (response.ok) {
+    confirmacion.style.color = "green";
+    confirmacion.textContent = `¡Gracias, ${nombre}! Hemos recibido tu mensaje. ¡Dios te bendiga!`;
+    this.reset();
+  } else {
+    confirmacion.style.color = "red";
+    confirmacion.textContent = "Hubo un error al enviar. Intenta de nuevo.";
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar mensaje';
 });
 
 // ===== ANIMACIÓN FADE-IN AL SCROLL =====
