@@ -1,0 +1,220 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iglesia El Buen Pastor - San Juan del Sur</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <span><i class="fas fa-map-marker-alt"></i> San Juan del Sur, Rivas, Nicaragua</span>
+      <span><i class="fas fa-sun"></i> 29C - Soleado</span>
+    </div>
+  </div>
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#inicio" class="nav-logo">
+        <img src="logo.jpg" alt="Logo">
+        <span>El Buen Pastor</span>
+      </a>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Buscar...">
+        <button onclick="buscar()"><i class="fas fa-search"></i></button>
+      </div>
+      <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#ministerios">Ministerios</a></li>
+        <li><a href="#eventos">Eventos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+  <header id="inicio" class="hero">
+    <div class="hero-overlay">
+      <h1>Iglesia El Buen Pastor A/D.</h1>
+      <p class="hero-lema">"Bienvenidos - Un lugar para toda la familia"</p>
+      <p class="hero-sub">San Juan del Sur - Rivas - Nicaragua</p>
+      <a href="#nosotros" class="btn-hero">Conocenos</a>
+    </div>
+  </header>
+  <main>
+    <!-- SECCIÓN DE VIDEOS - ESTILO YOUTUBE -->
+    <section id="videos" class="section videos-section">
+      <div class="section-inner">
+        <span class="label center">Nuestro Ministerio</span>
+        <h2 class="center">Videos y Testimonios</h2>
+        <p class="center sub">Conoce el impacto de nuestro ministerio a través de estos momentos especiales.</p>
+        
+        <div class="videos-container">
+          <!-- VIDEO PRINCIPAL -->
+          <div class="video-player-main">
+            <div class="video-wrapper-main">
+              <iframe 
+                id="mainVideoIframe"
+                src="https://www.youtube.com/embed/5qap5aO4i9A?controls=1&modestbranding=1" 
+                title="Video Principal" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="video-info-main">
+              <h3 id="mainVideoTitle">✨ Culto General</h3>
+              <p id="mainVideoDescription">Culto general de adoración y enseñanza bíblica. Acompáñanos en este momento especial de comunión con Dios.</p>
+              <span class="video-views" id="mainVideoViews">12K visualizaciones</span>
+            </div>
+          </div>
+
+          <!-- MINIATURAS -->
+          <div class="video-thumbnails">
+            <div class="thumbnail active" onclick="changeVideo(0)" data-video-id="5qap5aO4i9A">
+              <div class="thumbnail-image">
+                <img src="https://img.youtube.com/vi/5qap5aO4i9A/mqdefault.jpg" alt="Video 1">
+                <div class="play-icon"><i class="fas fa-play"></i></div>
+              </div>
+              <p class="thumbnail-title">Culto General</p>
+              <span class="thumbnail-meta">12K views</span>
+            </div>
+
+            <div class="thumbnail" onclick="changeVideo(1)" data-video-id="1H2jH7e8lH0">
+              <div class="thumbnail-image">
+                <img src="https://img.youtube.com/vi/1H2jH7e8lH0/mqdefault.jpg" alt="Video 2">
+                <div class="play-icon"><i class="fas fa-play"></i></div>
+              </div>
+              <p class="thumbnail-title">Ministerio de Oración</p>
+              <span class="thumbnail-meta">8.4K views</span>
+            </div>
+
+            <div class="thumbnail" onclick="changeVideo(2)" data-video-id="3s9b2B7kzrE">
+              <div class="thumbnail-image">
+                <img src="https://img.youtube.com/vi/3s9b2B7kzrE/mqdefault.jpg" alt="Video 3">
+                <div class="play-icon"><i class="fas fa-play"></i></div>
+              </div>
+              <p class="thumbnail-title">Ministerio Familiar</p>
+              <span class="thumbnail-meta">5.1K views</span>
+            </div>
+
+            <div class="thumbnail" onclick="changeVideo(3)" data-video-id="4fV5X5X5X5M">
+              <div class="thumbnail-image">
+                <img src="https://img.youtube.com/vi/4fV5X5X5X5M/mqdefault.jpg" alt="Video 4">
+                <div class="play-icon"><i class="fas fa-play"></i></div>
+              </div>
+              <p class="thumbnail-title">Cánticos de Adoración</p>
+              <span class="thumbnail-meta">3.7K views</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="nosotros" class="section fade-in">
+      <div class="section-inner">
+        <div class="col-text">
+          <span class="label">Quienes somos</span>
+          <h2>Una familia centrada en Cristo</h2>
+          <p>La Iglesia El Buen Pastor nació con el propósito de extender el Reino de Dios en San Juan del Sur, para transformar familias llevando el mensaje de salvación y formando discípulos de Cristo. </p>
+          
+          <blockquote>"Yo soy el buen pastor; el buen pastor su vida da por las ovejas." - Juan 10:11</blockquote>
+        </div>
+      </div>
+    </section>
+    <section id="ministerios" class="section section-alt fade-in">
+      <div class="section-inner">
+        <span class="label center">Lo que hacemos</span>
+        <h2 class="center">Nuestros Ministerios</h2>
+        <p class="center sub">Trabajamos en distintas areas para impactar positivamente a nuestra comunidad.</p>
+        <div class="cards">
+          <div class="card"><div class="card-icon"><i class="fas fa-male"></i></div><h3>M. varones</h3><p class="card-num">1</p><p>Estamos comprometidos en alcanzar a los varones para Cristo, como cabeza sacerdotal dentro de la familia.</p></div>
+          <div class="card"><div class="card-icon"><i class="fas fa-female"></i></div><h3>M. mujeres</h3><p class="card-num">2</p><p>Iniciativas de justicia social y acompañamiento comunitario.</p></div>
+          <div class="card"><div class="card-icon"><i class="fas fa-child"></i></div><h3>M. niños</h3><p class="card-num">3</p><p>Programas de salud integral para familias de la comunidad.</p></div>
+          <div class="card"><div class="card-icon"><i class="fas fa-users"></i></div><h3>M. Jóvenes</h3><p class="card-num">4</p><p>Llevando la palabra de Cristo, mediante actividades recreativas y deportivas.</p></div>
+          <div class="card"><div class="card-icon"><i class="fas fa-globe-americas"></i></div><h3>M. misiones</h3><p class="card-num">5</p><p>Oramos y bendecimos a familias misioneras fuera de nuestro pais.</p></div>
+          <div class="card"><div class="card-icon"><i class="fas fa-praying-hands"></i></div><h3>M. intersecion</h3><p class="card-num">6</p><p>Programas de inclusion para personas con necesidades especiales.</p></div>
+        </div>
+      </div>
+    </section>
+    <section id="eventos" class="section fade-in">
+      <div class="section-inner">
+        <span class="label center">Proximamente</span>
+        <h2 class="center">Eventos</h2>
+        <div class="eventos-grid">
+          <div class="evento-card"><div class="evento-fecha"><span class="mes">ABR</span><span class="dia">12</span></div><div class="evento-info"><h3>Sorteo de Escuela Deportiva</h3><p><i class="fas fa-clock"></i> 10:00 a.m. - Instalaciones de la iglesia</p><p>Participa en el sorteo de cupos para nuestra escuela deportiva comunitaria.</p></div></div>
+          <div class="evento-card"><div class="evento-fecha"><span class="mes">ABR</span><span class="dia">19</span></div><div class="evento-info"><h3>Mesa de Cafe de Almacenamiento</h3><p><i class="fas fa-clock"></i> 4:00 p.m. - Salon principal</p><p>Espacio de comunion, reflexion y planificacion para lideres y miembros.</p></div></div>
+          <div class="evento-card"><div class="evento-fecha"><span class="mes">ABR</span><span class="dia">26</span></div><div class="evento-info"><h3>Divulgacion Biblica</h3><p><i class="fas fa-clock"></i> 6:00 p.m. - Auditorio</p><p>Noche especial de ensenanza biblica abierta a toda la comunidad.</p></div></div>
+        </div>
+        <div class="horarios">
+          <h3><i class="fas fa-calendar-week"></i> Servicios Regulares</h3>
+          <ul>
+            <li><strong>Domingo:</strong> Escuela Dominical y Culto General - 10:00 a.m. a 5:00 p.m.</li>
+            <li><strong>Martes:</strong> Culto de Adoracion y Oracion - 6:00 p.m.</li>
+            <li><strong>Miercoles:</strong> Discipulado Biblico - 6:00 p.m.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section id="contacto" class="section fade-in">
+      <div class="section-inner two-col">
+        <div class="col-text">
+          <span class="label">Escribenos</span>
+          <h2>Contactenos</h2>
+          <p>Estamos aqui para servirte. Si tienes preguntas o necesitas oracion, no dudes en escribirnos.</p>
+          <ul class="contact-info">
+            <li><i class="fas fa-map-marker-alt"></i> San Juan del Sur, Rivas, Nicaragua</li>
+            <li><i class="fab fa-whatsapp"></i> +505 8230-9583</li>
+            <li><i class="fas fa-envelope"></i> <a href="mailto:elbuenpastoriglesia88@gmail.com">elbuenpastoriglesia88@gmail.com</a></li>
+          </ul>
+        </div>
+        <div class="col-form">
+          <form id="contactForm" action="https://formspree.io/f/xvzdpyqq" method="POST">
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required>
+            <input type="email" id="email" name="email" placeholder="Correo electronico" required>
+            <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribe tu mensaje..." required></textarea>
+            <button type="submit"><i class="fas fa-paper-plane"></i> Enviar mensaje</button>
+          </form>
+          <p id="confirmacion"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <p>Iglesia El Buen Pastor A/D<br>San Juan del Sur - Rivas - Nicaragua</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navegacion</h4>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#ministerios">Ministerios</a></li>
+          <li><a href="#eventos">Eventos</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h4>Siguenos</h4>
+        <div class="social-icons">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://wa.me/50582309583" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p class="clima"><i class="fas fa-sun"></i> San Juan del Sur - 29C - Soleado</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>2025 Iglesia El Buen Pastor - "Señor bendice, ensancha mi territorio, acompañame siempre y librame de todo mal para que no me dañe." 1 Croni 4:9-10.</p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/50582309583" target="_blank" class="whatsapp-float" aria-label="Contactar por WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A time-lapse adventure · RUSTADMEDIA</title>
+  <!-- Fuente limpia y moderna -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0b0d10;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Inter', sans-serif;
+      padding: 1.5rem;
+    }
+
+    /* Tarjeta principal – fiel al estilo "time-lapse adventure" */
+    .card {
+      max-width: 1100px;
+      width: 100%;
+      background: #14171c;
+      border-radius: 2.5rem;
+      padding: 2.5rem 2.5rem 3rem;
+      box-shadow: 0 25px 50px -10px rgba(0, 0, 0, 0.8);
+      border: 1px solid #2a2f36;
+      transition: all 0.2s ease;
+    }
+
+    /* Encabezado con el título y el logotipo / marca */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid #2a2f36;
+      padding-bottom: 1.25rem;
+    }
+
+    .title-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .title-main {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #f0f2f5;
+      line-height: 1.2;
+    }
+
+    .title-main span {
+      background: linear-gradient(135deg, #d4b68a, #b8956a);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+
+    .sub-head {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #8e959f;
+      letter-spacing: 0.3px;
+      margin-top: 4px;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #1e2329;
+      padding: 0.5rem 1.2rem 0.5rem 1rem;
+      border-radius: 100px;
+      border: 1px solid #2f353e;
+    }
+
+    .brand-icon {
+      width: 28px;
+      height: 28px;
+      background: #d4b68a;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #0b0d10;
+    }
+
+    .brand-text {
+      font-weight: 600;
+      color: #e8edf2;
+      letter-spacing: 0.3px;
+      font-size: 1.1rem;
+    }
+
+    .brand-text small {
+      font-weight: 400;
+      color: #8e959f;
+      font-size: 0.7rem;
+      margin-left: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ----- SLIDER DE VÍDEOS (carrusel) ----- */
+    .slider-container {
+      position: relative;
+      width: 100%;
+      margin: 0.8rem 0 0.5rem;
+      overflow: hidden;
+      border-radius: 1.8rem;
+    }
+
+    .slider-track {
+      display: flex;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+
+    .slide {
+      flex: 0 0 100%;
+      padding: 0 0.25rem;
+      box-sizing: border-box;
+    }
+
+    .video-item {
+      background: #1b2026;
+      border-radius: 1.8rem;
+      overflow: hidden;
+      border: 1px solid #2a3038;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.6);
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      background: #0b0d10;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .video-footer {
+      padding: 1rem 1.2rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #1b2026;
+    }
+
+    .video-title {
+      color: #eef2f6;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: -0.2px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .video-title .badge {
+      background: #d4b68a;
+      color: #0b0d10;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 40px;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .video-meta {
+      color: #8e959f;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .video-meta svg {
+      width: 14px;
+      height: 14px;
+      fill: #8e959f;
+    }
+
+    /* Controles del slider */
+    .slider-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 1.8rem;
+    }
+
+    .slider-btn {
+      background: #1e2329;
+      border: 1px solid #2f353e;
+      color: #d4b68a;
+      width: 48px;
+      height: 48px;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, transform 0.1s;
+      font-size: 1.6rem;
+      line-height: 1;
+      user-select: none;
+    }
+
+    .slider-btn:hover {
+      background: #2a313a;
+      border-color: #d4b68a;
+    }
+
+    .slider-btn:active {
+      transform: scale(0.94);
+    }
+
+    .dots {
+      display: flex;
+      gap: 10px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 20px;
+      background: #2f353e;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: background 0.2s, width 0.2s;
+    }
+
+    .dot.active {
+      background: #d4b68a;
+      width: 28px;
+    }
+
+    .dot:hover {
+      background: #5f6873;
+    }
+
+    /* Sección "más vídeos" sutil */
+    .footer-channel {
+      margin-top: 2.8rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem 2rem;
+      border-top: 1px solid #2a3038;
+      padding-top: 2rem;
+      color: #8e959f;
+      font-size: 0.9rem;
+    }
+
+    .channel-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #1e2329;
+      padding: 0.6rem 1.6rem;
+      border-radius: 60px;
+      border: 1px solid #2f353e;
+      text-decoration: none;
+      color: #e8edf2;
+      font-weight: 500;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .channel-link:hover {
+      background: #2a313a;
+      border-color: #d4b68a;
+      color: white;
+    }
+
+    .channel-link svg {
+      width: 20px;
+      height: 20px;
+      fill: #d4b68a;
+    }
+
+    .footer-note {
+      color: #5f6873;
+      font-size: 0.8rem;
+      letter-spacing: 0.2px;
+    }
+
+    .footer-note strong {
+      color: #b8c1cc;
+      font-weight: 500;
+    }
+
+    /* Ajustes para móviles */
+    @media (max-width: 700px) {
+      .card {
+        padding: 1.5rem;
+        border-radius: 1.8rem;
+      }
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .title-main {
+        font-size: 1.8rem;
+      }
+      .brand {
+        align-self: flex-start;
+      }
+      .video-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      .slider-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 1.4rem;
+      }
+      .footer-channel {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .title-main {
+        font-size: 1.5rem;
+      }
+      .brand-text {
+        font-size: 0.9rem;
+      }
+      .slider-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- Encabezado: "A time-lapse adventure" + RUSTADMEDIA -->
+    <div class="header">
+      <div class="title-group">
+        <h1 class="title-main">
+          A <span>time-lapse</span> adventure
+        </h1>
+        <div class="sub-head">✦ curated videos · rustadmedia</div>
+      </div>
+      <div class="brand">
+        <div class="brand-icon">⚡</div>
+        <div class="brand-text">
+          RUSTADMEDIA <small>· STUDIO</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDER DE VÍDEOS (carrusel) -->
+    <div class="slider-container">
+      <div class="slider-track" id="sliderTrack">
+        <!-- Slide 1 -->
+        <div class="slide">
+          <div class="video-item">
+            <div class="video-wrapper">
+              <iframe 
+                src="https://www.youtube.com/embed/5qap5aO4i9A" 
+                title="Time-lapse 1" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="video-footer">
+              <span class="video-title">
+                <span class="badge">🌿</span> Aurora timelapse
+              </span>
+              <span class="video-meta">
+                <svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+                12K
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="slide">
+          <div class="video-item">
+            <div class="video-wrapper">
+              <iframe 
+                src="https://www.youtube.com/embed/1H2jH7e8lH0" 
+                title="Time-lapse 2" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="video-footer">
+              <span class="video-title">
+                <span class="badge">🏔️</span> Mountain light
+              </span>
+              <span class="video-meta">
+                <svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+                8.4K
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="slide">
+          <div class="video-item">
+            <div class="video-wrapper">
+              <iframe 
+                src="https://www.youtube.com/embed/3s9b2B7kzrE" 
+                title="Time-lapse 3" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="video-footer">
+              <span class="video-title">
+                <span class="badge">🌆</span> Cityscape nights
+              </span>
+              <span class="video-meta">
+                <svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+                5.1K
+              </span>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 4 -->
+        <div class="slide">
+          <div class="video-item">
+            <div class="video-wrapper">
+              <iframe 
+                src="https://www.youtube.com/embed/4fV5X5X5X5M" 
+                title="Time-lapse 4" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="video-footer">
+              <span class="video-title">
+                <span class="badge">🌊</span> Ocean dreams
+              </span>
+              <span class="video-meta">
+                <svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+                3.7K
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controles del slider -->
+    <div class="slider-controls">
+      <button class="slider-btn" id="prevSlide" aria-label="Slide anterior">‹</button>
+      <div class="dots" id="dotsContainer">
+        <span class="dot active" data-index="0"></span>
+        <span class="dot" data-index="1"></span>
+        <span class="dot" data-index="2"></span>
+        <span class="dot" data-index="3"></span>
+      </div>
+      <button class="slider-btn" id="nextSlide" aria-label="Slide siguiente">›</button>
+    </div>
+
+    <!-- Pie: enlace al canal + mención RUSTADMEDIA -->
+    <div class="footer-channel">
+      <a href="#" class="channel-link" target="_blank">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          Ver canal RUSTADMEDIA
+        </a>
+      <span class="footer-note">
+        <strong>✦</strong> time-lapse · cinematography · 4K
+      </span>
+      <span class="footer-note" style="color:#4f5966;">
+        © RUSTADMEDIA · 2026
+      </span>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const track = document.getElementById('sliderTrack');
+      const slides = track.querySelectorAll('.slide');
+      const totalSlides = slides.length;
+      let currentIndex = 0;
+      let isTransitioning = false;
+
+      const dots = document.querySelectorAll('.dot');
+      const prevBtn = document.getElementById('prevSlide');
+      const nextBtn = document.getElementById('nextSlide');
+
+      function goToSlide(index) {
+        if (isTransitioning) return;
+        if (index < 0) index = totalSlides - 1;
+        if (index >= totalSlides) index = 0;
+        if (index === currentIndex) return;
+
+        isTransitioning = true;
+        currentIndex = index;
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        // Actualizar dots
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === currentIndex);
+        });
+
+        // Desbloquear transición después del movimiento
+        setTimeout(() => {
+          isTransitioning = false;
+        }, 400);
+      }
+
+      // Eventos de los botones
+      prevBtn.addEventListener('click', () => {
+        goToSlide(currentIndex - 1);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        goToSlide(currentIndex + 1);
+      });
+
+      // Click en dots
+      dots.forEach((dot) => {
+        dot.addEventListener('click', function() {
+          const index = parseInt(this.getAttribute('data-index'), 10);
+          if (!isNaN(index)) {
+            goToSlide(index);
+          }
+        });
+      });
+
+      // Inicializar posición (por si acaso)
+      track.style.transform = `translateX(0%)`;
+
+      // Opcional: teclado (flechas)
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          goToSlide(currentIndex - 1);
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          goToSlide(currentIndex + 1);
+        }
+      });
+
+      // Exponer goToSlide para debug (opcional)
+      window.goToSlide = goToSlide;
+    })();
+  </script>
+</body>
+</html>
